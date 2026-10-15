@@ -1,0 +1,14 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Vercel
+.vercel
+
+# Never commit data exports or secrets
+*.log
+printshop-backup-*.json
+.env
+.env.*
