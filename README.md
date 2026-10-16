@@ -38,12 +38,9 @@
 ├── vercel.json             # Vercel headers / caching
 ├── favicon.ico
 ├── logo.png
-└── icons/
-    ├── icon-192.png
-    ├── icon-512.png
-    ├── icon-maskable-512.png
-    ├── apple-touch-icon.png
-    └── favicon-32.png
+├── icon-192.png / icon-512.png / icon-maskable-512.png   # app icons
+├── apple-touch-icon.png                               # iPhone icon
+└── favicon-32.png
 ```
 
 There is **no build step and no dependencies** — it is a static site.
@@ -54,7 +51,7 @@ There is **no build step and no dependencies** — it is a static site.
 **Option A — in the browser (no tools needed)**
 1. Go to [github.com/new](https://github.com/new), name the repository (e.g. `print-shop-pos`), choose **Private** or Public, click **Create repository**.
 2. Click **uploading an existing file**.
-3. Unzip this project, then drag **all the files and the `icons` folder** (not the outer folder itself) into the page.
+3. Unzip this project, then drag **all the files** (not the outer folder itself) into the page. All files sit in one folder — no subfolders.
 4. Click **Commit changes**.
 
 **Option B — with git**
@@ -81,7 +78,8 @@ Every push to `main` redeploys automatically. The app checks for the new version
 
 ### 3. Install on a phone (optional)
 Open the Vercel link, then:
-- **Android (Chrome):** menu ⋮ → **Install app** (or the **📲 I-install** button in the app).
+- **Android (Chrome):** the **📲 I-install** button at the top of the app, or menu ⋮ → **Install app**.
+- **Computer (Chrome/Edge):** the 📲 icon in the address bar, or **Setup → 📲 I-install ang app**.
 - **iPhone (Safari):** Share → **Add to Home Screen**.
 
 ## Important: where the data lives
@@ -109,13 +107,13 @@ Just open `index.html` in a browser — it works without a server (install/offli
 
 ## Updating the app
 
-Replace `index.html` with the new version, commit, and push. Vercel redeploys within a minute. If you change other cached files (icons, manifest), also bump `CACHE` in `sw.js` (e.g. `printshop-pos-v13`).
+Replace `index.html` with the new version, commit, and push. Vercel redeploys within a minute. If you change other cached files (icons, manifest), also bump `CACHE` in `sw.js` (e.g. `printshop-pos-v15`).
 
 ---
 
 ## Paano i-deploy (Tagalog, maikli)
 
-1. **GitHub:** Gumawa ng bagong repo sa github.com/new → *uploading an existing file* → i-drag lahat ng files at ang `icons` folder → *Commit changes*.
+1. **GitHub:** Gumawa ng bagong repo sa github.com/new → *uploading an existing file* → i-drag lahat ng files (walang subfolder) → *Commit changes*.
 2. **Vercel:** vercel.com/new → i-Import ang repo → Framework: **Other**, walang Build Command → **Deploy**.
 3. Buksan ang link (`…vercel.app`). Sa phone, pwedeng **I-install** para parang app.
 4. **Tandaan:** naka-save ang data sa browser ng bawat device. Gamitin ang **Cloud Sync** para pareho ang data sa ibang device, at **mag-Backup** palagi.

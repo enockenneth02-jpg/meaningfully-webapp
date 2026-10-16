@@ -3,21 +3,25 @@
    - The page itself is fetched network-first, so a new deploy shows up on the next open.
    - Icons and other static files are cache-first.
    - Requests to other sites (Gemini AI, Supabase sync) are never cached. */
-const CACHE = 'printshop-pos-v13';
+const CACHE = 'printshop-pos-v14';
 const CORE = [
   './',
-  './index.html',
   './manifest.webmanifest',
   './favicon.ico',
-  './icons/icon-192.png',
-  './icons/icon-512.png',
-  './icons/icon-maskable-512.png',
-  './icons/apple-touch-icon.png',
-  './icons/favicon-32.png'
+  './icon-192.png',
+  './icon-512.png',
+  './icon-maskable-512.png',
+  './apple-touch-icon.png',
+  './favicon-32.png'
 ];
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(CACHE).then((c) => c.addAll(CORE)).then(() => self.skipWaiting()));
+  // add files one by one so a single missing file never stops the app from installing
+  event.waitUntil(
+    caches.open(CACHE)
+      .then((c) => Promise.all(CORE.map((u) => c.add(u).catch(() => null))))
+      .then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener('activate', (event) => {
@@ -42,11 +46,11 @@ self.addEventListener('fetch', (event) => {
         .then((res) => {
           if (res && res.ok) {
             const copy = res.clone();
-            caches.open(CACHE).then((c) => c.put('./index.html', copy));
+            caches.open(CACHE).then((c) => c.put('./', copy));
           }
           return res;
         })
-        .catch(() => caches.match('./index.html').then((r) => r || caches.match('./')))
+        .catch(() => caches.match('./').then((r) => r || caches.match(req)))
     );
     return;
   }
