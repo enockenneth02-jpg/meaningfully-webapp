@@ -3,7 +3,7 @@
    - The page itself is fetched network-first, so a new deploy shows up on the next open.
    - Icons and other static files are cache-first.
    - Requests to other sites (Gemini AI, Supabase sync) are never cached. */
-const CACHE = 'printshop-pos-v16';
+const CACHE = 'printshop-pos-v17';
 const CORE = [
   './',
   './manifest.webmanifest',
